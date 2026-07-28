@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spin & Win!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- Lead Capture Form Overlay -->
+  <div id="leadOverlay" class="lead-overlay">
+    <div class="lead-card">
+      <h2 class="lead-title">🎁 Spin <span>&</span> Win!</h2>
+      <p class="lead-desc">Enter your details below for a chance to win exclusive discounts!</p>
+
+      <form id="leadForm" autocomplete="on" novalidate>
+        <div class="form-group">
+          <label for="leadName">Name <span class="required">*</span></label>
+          <input type="text" id="leadName" name="name" placeholder="Your full name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="leadMobile">Mobile Number <span class="required">*</span></label>
+          <div class="phone-input">
+            <select id="leadCountryCode" name="country_code">
+              <option value="+91">🇮🇳 +91</option>
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+971">🇦🇪 +971</option>
+              <option value="+61">🇦🇺 +61</option>
+              <option value="+65">🇸🇬 +65</option>
+            </select>
+            <input type="tel" id="leadMobile" name="mobile" placeholder="9876543210" required pattern="[0-9]{7,15}" />
+          </div>
+        </div>
+
+        <div class="form-divider">
+          <span>Optional</span>
+        </div>
+
+        <div class="form-group">
+          <label for="leadEmail">Email</label>
+          <input type="email" id="leadEmail" name="email" placeholder="you@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="leadDob">Date of Birth</label>
+          <input type="date" id="leadDob" name="dob" />
+        </div>
+
+        <p id="formError" class="form-error" hidden></p>
+
+        <button type="submit" id="leadSubmitBtn" class="btn btn-apply lead-submit">
+          Let Me Spin! 🎰
+        </button>
+
+        <p class="form-privacy">🔒 Your details are safe. We don't spam.</p>
+      </form>
+    </div>
+  </div>
+
+  <div class="container" id="mainApp" style="display:none;">
+    <h1 class="title">Spin <span>&</span> Win!</h1>
+    <p class="subtitle">Try your luck — tap the button to spin the wheel</p>
+
+    <div class="wheel-wrapper">
+      <div class="pointer"></div>
+      <canvas id="wheelCanvas" width="420" height="420"></canvas>
+      <button id="spinBtn" class="spin-btn" aria-label="Spin the wheel">SPIN</button>
+    </div>
+
+    <!-- Edit Toggle -->
+    <button id="editToggleBtn" class="btn btn-edit-toggle">🔒 Edit Segments</button>
+
+    <!-- Customization Panel (hidden by default) -->
+    <div class="panel" id="editPanel" hidden>
+      <div class="panel-header">
+        <h2>Customize Segments</h2>
+        <button id="lockBtn" class="btn btn-lock" title="Lock editing">🔒 Lock</button>
+      </div>
+      <div id="segmentList" class="segment-list"></div>
+      <div class="panel-actions">
+        <button id="addSegmentBtn" class="btn btn-add">+ Add Segment</button>
+        <button id="applyBtn" class="btn btn-apply">Apply Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Prompt Modal -->
+  <div id="keyModal" class="modal-overlay" hidden>
+    <div class="modal">
+      <h2>🔐 Enter Admin Key</h2>
+      <p class="result-text">This section is password-protected.</p>
+      <input type="password" id="keyInput" class="key-input" placeholder="Enter key…" autocomplete="off" />
+      <p id="keyError" class="key-error" hidden>Incorrect key. Try again.</p>
+      <div class="panel-actions" style="margin-top:1rem;">
+        <button id="keyCancelBtn" class="btn btn-add">Cancel</button>
+        <button id="keySubmitBtn" class="btn btn-apply">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result Modal -->
+  <div id="resultModal" class="modal-overlay" hidden>
+    <div class="modal">
+      <div class="confetti-burst" id="confettiBurst"></div>
+      <h2 id="resultHeading">🎉 Congratulations!</h2>
+      <p class="result-text"><span id="resultMsg">You won: </span><strong id="resultText"></strong></p>
+      <button id="closeModal" class="btn btn-apply">Awesome!</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
